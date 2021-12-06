@@ -8,16 +8,11 @@ import altair as alt
 # SETTING PAGE CONFIG TO WIDE MODE
 st.set_page_config(layout="wide")
 
-st.title('NYCHA Services Impact')
+st.title('Impact NYCHA Services has on residents')
 
-st.info("Funding for NYCHA has been decreasing since 1998, the purpose of this project is to analyze the services that are the most impactful and used by public housing residents. This will demosntrate which services should recieve more funding since they help more resisdents.")
+st.info("Funding for NYCHA has been decreasing since 1998, the purpose of this project is to analyze the services that are the most impactful and used by public housing residents. This will demosntrate which services should recieve more funding since they help more residents.")
 
-DATE_COLUMN = 'date/time'
-DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
-            'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
-
-
-
+st.info("The New York City Housing Authority (NYCHA), is the largest public housing authority in North America, was created in 1935 to provide decent, affordable housing for low- and moderate-income New Yorkers.  NYCHA is home to 1 in 15 New Yorkers. 564,301 New Yorkers in total are served by NYCHA’s public housing and Section 8 programs")
 @st.cache
 def load_data(filename = "SummerYouth.csv"):
     df = pd.read_csv(filename)
@@ -69,17 +64,13 @@ st.plotly_chart(fig)
 # st.bar_chart(hist_values)
 
 
-#code showing blah blah blah 
+st.warning('More Visualizations to come...')
+
+
 body = ''' 
-def mystery(*args):
-       print(max(args)-min(args))
-
-
-mystery(17,8,74,46)
+#DBA
 '''
 #displaying the code 
 if st.checkbox('Code done to get linear regression'):
     st.code(body, language = 'python')
 
-#balloons
-#st.balloons()
