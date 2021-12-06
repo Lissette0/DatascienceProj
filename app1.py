@@ -42,9 +42,17 @@ if st.checkbox('Show Raw Data'):
 chart_data = pd.DataFrame(yearsDF, columns=['Applied for the program', 'Were accepted and enrolled'])
 st.bar_chart(chart_data, height=400)
 
-fig = px.bar(yearsDF, x="Year", y=["Applied for the program", "Were accepted and enrolled"], barmode='group', height=600)
+
+
+row1_1, row1_2 = st.columns((2,3))
+with row1_1:
+    fig = px.bar(yearsDF, x="Year", y=["Applied for the program", "Were accepted and enrolled"], barmode='group', height=600)
 # st.dataframe(df) # if need to display dataframe
-st.plotly_chart(fig)
+    st.plotly_chart(fig)
+
+with row1_2:
+    chart_data = pd.DataFrame( np.random.randn(20, 3), columns=['SNAP and Cash Service', 'FInanical Services', 'REEF/Workforce Service'])
+    st.line_chart(chart_data)
 
 
 
@@ -62,6 +70,8 @@ st.plotly_chart(fig)
 # st.subheader('Number of pickups by hour')
 # hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
 # st.bar_chart(hist_values)
+
+
 
 
 st.warning('More Visualizations to come...')
