@@ -46,9 +46,9 @@ def year_sum():
 #     return data
 
 yearsDF = year_sum()
-
+raw_summeryouth = load_data()
 if st.checkbox('Show Raw Data'):
-     st.write(yearsDF)
+     st.write(raw_summeryouth)
 
 
 row1_4, row1_3 = st.columns((2,3))
