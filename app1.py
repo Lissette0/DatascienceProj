@@ -57,8 +57,7 @@ st.plotly_chart(fig0)
 
 #storing Workforce 1 program for NYCHA Residents df
 
-    
-@st.cache
+
 def work_data(filename = "workforce_1.csv"):
     workdf = pd.read_csv(filename)
     workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
