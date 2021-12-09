@@ -56,10 +56,14 @@ st.plotly_chart(fig0)
 
 
 #storing Workforce 1 program for NYCHA Residents df
-
-
-def work_data(filename = "workforce_1.csv"):
-    workdf = pd.read_csv(filename)
+@st.cache
+def RAWork(filename = "workforce_1.csv"):
+    df = pd.read_csv(filename)
+    return df
+    
+@st.cache
+def work_data():
+    workdf = RAWork()
     workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
     dropCols = ['Applied for the program','Average Wage','Enrolled in college-readiness courses or participated in college-readiness activities through the program']
     workdf = workdf.drop(columns=dropCols)
