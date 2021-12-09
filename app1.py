@@ -6,8 +6,10 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import altair as alt
 
+#st.set_page_config(page_title='NYCHA DataScience', page_icon="🖖")
+
 # SETTING PAGE CONFIG TO WIDE MODE
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title='NYCHA DataScience', page_icon="✨")
 
 st.title('Impact NYCHA Services has on Residents')
 
@@ -34,7 +36,51 @@ def RAWsnap(filename = "SNAPandCASH.csv"):
     df = pd.read_csv(filename)
     return df
 
-snapdf = RAWsnap()
+@st.cache
+def sc_data():
+    snapdf = RAWsnap()
+    dropCols = ['Submitted applications for benefits under SNAP','Were income-eligible for SNAP benefits','Submitted applications for benefits under Cash Assistance', 'Were income-eligible for Cash Assisstance']
+    snapdf = snapdf.drop(columns=dropCols) # drop the cols from the dataframe
+    snap = snapdf.groupby(['Year'], as_index=False)['Received benefits under SNAP'].sum()
+    cash = snapdf.groupby(['Year'], as_index=False)['Received benefits under Cash Assistance'].sum()
+    result = pd.merge(snap, cash, on=["Year"])
+    return result
+
+scDF = sc_data()
+fig0 = px.bar(scDF, x="Year", y=["Received benefits under SNAP", "Received benefits under Cash Assistance"], title="NYCHA Residents that reiceved SNAP and/or Cash Assistance ", barmode='group', height=600)
+# st.dataframe(df) # if need to display dataframe
+st.plotly_chart(fig0)
+
+#end of snap and cash analysis ###########################
+
+
+
+#storing Workforce 1 program for NYCHA Residents df
+
+    
+@st.cache
+def work_data(filename = "workforce_1.csv"):
+    workdf = pd.read_csv(filename)
+    workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
+    dropCols = ['Applied for the program','Average Wage','Enrolled in college-readiness courses or participated in college-readiness activities through the program']
+    workdf = workdf.drop(columns=dropCols)
+    workdf['Placed into full-time or part-time jobs'] = (workdf.iloc[:, 3:8].sum(axis=1))
+    workdf.drop(workdf.iloc[:,3:8] , axis=1, inplace=True)
+    enroll = workdf.groupby(['Year'], as_index=False)['Were accepted and enrolled'].sum()
+    bene = workdf.groupby(['Year'], as_index=False)['Placed into full-time or part-time jobs'].sum()
+    result = pd.merge(enroll, bene, on=["Year"])
+    return result
+
+
+workDF = work_data()
+fig01 = px.bar(workDF, x='Year', y=['Were accepted and enrolled', 'Placed into full-time or part-time jobs'], title="NYCHA Residents that enrolled/benefited from Workforce 1 Program ", barmode='group', height=600)
+# st.dataframe(df) # if need to display dataframe
+st.plotly_chart(fig01)
+
+
+
+
+
 
 
 
