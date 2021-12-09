@@ -172,7 +172,7 @@ finDF1 = financial_result2()
 
 
 fig12 = px.bar(finDF1, x="Year", y=["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"], 
-                 title="NYCHA Residents whom Reported program to be beneficial ", barmode='group', height=600)
+                 title="NYCHA Residents that Reported program to be beneficial ", barmode='group', height=600)
 # st.dataframe(df) # if need to display dataframe
 st.plotly_chart(fig12)
 
