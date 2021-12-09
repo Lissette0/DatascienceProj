@@ -61,7 +61,7 @@ def RAWork(filename = "workforce_1.csv"):
     df = pd.read_csv(filename)
     return df
     
-@st.cache
+@st.cache(suppress_st_warning=True)
 def work_data():
     workdf = RAWork()
     workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
