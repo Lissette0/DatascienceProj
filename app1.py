@@ -57,11 +57,11 @@ st.plotly_chart(fig0)
 
 #storing Workforce 1 program for NYCHA Residents df
 @st.cache
-def RAWork(filename = "workforce_1.csv"):
+def RAWork(filename = "Workforce_1.csv"):
     df = pd.read_csv(filename)
     return df
     
-@st.cache(suppress_st_warning=True)
+@st.cache()
 def work_data():
     workdf = RAWork()
     workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
