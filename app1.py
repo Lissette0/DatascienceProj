@@ -12,7 +12,7 @@ from sklearn.linear_model import LinearRegression
 # SETTING PAGE CONFIG TO WIDE MODE
 st.set_page_config(layout="wide", page_title='NYCHA DataScience', page_icon="✨")
 
-st.title("Decline of Services/Programs for NYCHA Residents 🌃") #title of the page
+st.title("Decline of Programs for NYCHA Residents 🌃") #title of the page
 
 st.markdown(''' <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,8 @@ st.markdown(
 
 
 st.markdown("""---""")
-st.subheader("Exploring Enrollment rates for services/programs provided to NYCHA Residents")
+st.markdown('''<div> <h3 >Exploring Enrollment rates of services/programs provided to NYCHA Residents</h3></div>''', unsafe_allow_html = True)
+#st.subheader("Exploring Enrollment rates for services/programs provided to NYCHA Residents")
 st.write("CSCI 39542 Data Science Project")
 st.markdown("""---""")
 st.subheader('Overview')
