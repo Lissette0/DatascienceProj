@@ -309,11 +309,11 @@ with row1_2:
             rawFin2 = financial2()
             st.write(rawFin2)
         with row1_2:
-            fig1 = px.bar(finDF, x="Year", y=["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"], title="NYCHA Residents that enrolled in the Financial Services ", barmode='group', height=600)
+            fig1 = px.bar(finDF, x="Year", y=["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"], title="NYCHA Residents that enrolled in the Financial Services ", barmode='group', width=600, height=400)
             st.plotly_chart(fig1)
         with row1_3:
             fig12 = px.bar(finDF1, x="Year", y=["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"], 
-                            title="NYCHA Residents that Reported program to be beneficial ", barmode='group', height=600)
+                            title="NYCHA Residents that Reported program to be beneficial ", barmode='group', width=600, height=400)
             st.plotly_chart(fig12)
         with st.expander("Conclusion"):
             st.write("""
