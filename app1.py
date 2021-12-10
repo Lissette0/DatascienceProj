@@ -331,15 +331,16 @@ def custom_legend_name(new_names):
         fig09.data[i].name = new_name
 
 SummerYouth_enrollment = [None, 10329.0, 10643.0, None]
-
+SummerYouthdf = pd.DataFrame(SummerYouth_enrollment, columns=['SummerYouth_enrollment'])
 
 
 workDF.loc[len(workDF.index)] = ['2020',None,None]
+
 with st.echo(code_location='below'):
     listyear = ["2017","2018","2019","2020"]
     fig09 = px.scatter(
         x=listyear,
-        y=[scDF["Received benefits under Cash Assistance"], scDF["Received benefits under SNAP"], SummerYouth_enrollment, comb["Total_financial"], workDF["Were accepted and enrolled"].astype(float)],
+        y=[scDF["Received benefits under Cash Assistance"].astype(float), scDF["Received benefits under SNAP"].astype(float), SummerYouthdf["SummerYouth_enrollment"].astype(float), comb["Total_financial"].astype(float), workDF["Were accepted and enrolled"].astype(float)],
         trendline="ols"
     )
     custom_legend_name(["Cash Assistance", None, "SNAP", None, "Summer Youth", None, "Financial Services",None, "Workforce 1"])
