@@ -62,11 +62,12 @@ def RAWork(filename = "Workforce_1.csv"):
 @st.cache()
 def work_data():
     workdf = RAWork()
+    workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
     dropCols = ['Applied for the program','Average Wage','Enrolled in college-readiness courses or participated in college-readiness activities through the program']
     workdf = workdf.drop(columns=dropCols)
-    workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
     workdf['Placed into full-time or part-time jobs'] = (workdf.iloc[:, 3:8].sum(axis=1))
     workdf.drop(workdf.iloc[:,3:8] , axis=1, inplace=True)
+    workdf["Were accepted and enrolled"] = workdf['Were accepted and enrolled'].astype(float)
     enroll = workdf.groupby(['Year'], as_index=False)['Were accepted and enrolled'].sum()
     bene = workdf.groupby(['Year'], as_index=False)['Placed into full-time or part-time jobs'].sum()
     result = pd.merge(enroll, bene, on=["Year"])
