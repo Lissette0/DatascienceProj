@@ -59,7 +59,7 @@ def RAWork(filename = "Workforce_1.csv"):
     return df
 
 #this function...
-@st.cache()
+@st.cache(allow_output_mutation=True)
 def work_data():
     workdf = RAWork()
     workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
