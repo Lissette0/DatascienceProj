@@ -1,11 +1,3 @@
-
-"""
-NAME: Lissette Duran
-EMAIL: lissette.duran40@myhunter.cuny.edu
-TITLE: Decline of Services/Programs for NYCHA residents
-RESOURCES: SNAP and Cash Assistance for NYCHA Residents: https://data.cityofnewyork.us/Social-Services/SNAP-and-Cash-Assistance-for-NYCHA-Residents-Local/ay6v-3gm3/data  Workforce 1 for NYCHA Residents by Borough: https://data.cityofnewyork.us/Social-Services/Workforce-1-for-NYCHA-Residents-by-Borough-Local-L/v7hc-c85a/data 2017-18 Financial Services for NYCHA Residents: https://data.cityofnewyork.us/City-Government/2017-18-Financial-Services-for-NYCHA-Residents-Loc/g4tm-nibn/data 2019 Financial Services for NYCHA Residents: https://data.cityofnewyork.us/City-Government/Financial-Services-for-NYCHA-Residents-by-Borough-/2c9f-2ta9/data) tutorial links that helped me build the application( https://www.youtube.com/watch?v=-IM3531b1XU https://docs.streamlit.io/streamlit-cloud/get-started https://docs.streamlit.io/library/cheatsheet )
-URL: https://share.streamlit.io/lissette0/datascienceproj/main/app1.py
-"""
 import streamlit as st
 import pandas as pd
 pd.options.mode.chained_assignment = None  # default='warn' 
@@ -21,6 +13,24 @@ from sklearn.linear_model import LinearRegression
 st.set_page_config(layout="wide", page_title='NYCHA DataScience', page_icon="✨")
 
 st.title("Decline of Services/Programs for NYCHA residents 🌃") #title of the page
+
+st.markdown(''' <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">''', unsafe_allow_html = True)
+#st.markdown('''<div> <h1 style ="font-family: 'Poppins', sans-serif;" >Decline of Services/Programs for NYCHA Residents 🌃</h1></div>''', unsafe_allow_html = True)
+st.markdown(
+  """
+        <style>
+    html, body, [class*="css"]  {
+    font-family: 'Poppins', sans-serif;
+    }
+    </style>
+
+    """,
+        unsafe_allow_html=True,
+    )
+
+
 st.markdown("""---""")
 st.subheader("Exploring Enrollment rates for services/programs provided to NYCHA Residents")
 st.write("CSCI 39542 Data Science Project")
