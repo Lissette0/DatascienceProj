@@ -333,8 +333,8 @@ def custom_legend_name(new_names):
 SummerYouth_enrollment = [None, 10329.0, 10643.0, None]
 SummerYouthdf = pd.DataFrame(SummerYouth_enrollment, columns=['SummerYouth_enrollment'])
 
-work = work_data()
-work.loc[len(work.index)] = ['2020',None,None]
+# work = work_data()
+# work.loc[len(work.index)] = ['2020',None,None]
 with st.echo(code_location='below'):
     listyear = ["2017","2018","2019","2020"]
     fig09 = px.scatter(
