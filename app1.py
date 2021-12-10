@@ -68,6 +68,7 @@ def work_data():
     workdf['Placed into full-time or part-time jobs'] = (workdf.iloc[:, 3:8].sum(axis=1))
     workdf.drop(workdf.iloc[:,3:8] , axis=1, inplace=True)
     workdf["Were accepted and enrolled"] = workdf['Were accepted and enrolled'].astype(float)
+    workdf["Placed into full-time or part-time jobs"] = workdf['Placed into full-time or part-time jobs'].astype(float)
     enroll = workdf.groupby(['Year'], as_index=False)['Were accepted and enrolled'].sum()
     bene = workdf.groupby(['Year'], as_index=False)['Placed into full-time or part-time jobs'].sum()
     result = pd.merge(enroll, bene, on=["Year"])
@@ -338,8 +339,8 @@ with st.echo(code_location='below'):
     listyear = ["2017","2018","2019","2020"]
     fig09 = px.scatter(
         x=listyear,
-        y=[scDF["Received benefits under Cash Assistance"], scDF["Received benefits under SNAP"], SummerYouth_enrollment, comb["Total_financial"], workDF["Were accepted and enrolled"].astype(float) ],
-        trendline="ols", trendline_color_override="red"
+        y=[scDF["Received benefits under Cash Assistance"], scDF["Received benefits under SNAP"], SummerYouth_enrollment, comb["Total_financial"], workDF["Were accepted and enrolled"].astype(float)],
+        trendline="ols"
     )
     custom_legend_name(["Cash Assistance", None, "SNAP", None, "Summer Youth", None, "Financial Services",None, "Workforce 1"])
     fig09.update_layout(
@@ -350,26 +351,26 @@ with st.echo(code_location='below'):
     fig09.update_traces(marker_size=10)
     st.plotly_chart(fig09)
 
-row1_1, row1_2 = st.columns((1,4))
-with row1_1:
-    plist = ["SNAP", "Cash Assistance", "Financial Services", "Summer Youth", "WorkForce 1"]
-    service = st.selectbox("Select a Program/Service:", plist)
+# row1_1, row1_2 = st.columns((1,4))
+# with row1_1:
+#     plist = ["SNAP", "Cash Assistance", "Financial Services", "Summer Youth", "WorkForce 1"]
+#     service = st.selectbox("Select a Program/Service:", plist)
 
-with row1_2:
-    if service == "Cash Assistance":
-        rfig1 = px.scatter(scDF, x="Year", y="Received benefits under Cash Assistance", trendline="ols")
-        rfig1.update_traces(marker_size=10)
-        st.plotly_chart(rfig1)
-    elif service == "Summer Youth":
-        rfig2 = px.scatter(yearsDF, x="Year", y="Were accepted and enrolled", trendline="ols")
-        rfig2.update_traces(marker_size=10)
-        st.plotly_chart(rfig2)
-    elif service == "SNAP":
-        rfig3 = px.scatter(scDF, x="Year", y="Received benefits under SNAP", trendline="ols")
-        rfig3.update_traces(marker_size=10)
-        st.plotly_chart(rfig3)
-    else:
-        st.write("get cash")
+# with row1_2:
+#     if service == "Cash Assistance":
+#         rfig1 = px.scatter(scDF, x="Year", y="Received benefits under Cash Assistance", trendline="ols")
+#         rfig1.update_traces(marker_size=10)
+#         st.plotly_chart(rfig1)
+#     elif service == "Summer Youth":
+#         rfig2 = px.scatter(yearsDF, x="Year", y="Were accepted and enrolled", trendline="ols")
+#         rfig2.update_traces(marker_size=10)
+#         st.plotly_chart(rfig2)
+#     elif service == "SNAP":
+#         rfig3 = px.scatter(scDF, x="Year", y="Received benefits under SNAP", trendline="ols")
+#         rfig3.update_traces(marker_size=10)
+#         st.plotly_chart(rfig3)
+#     else:
+#         st.write("get cash")
 
 st.warning('More Visualizations to come...')
 
