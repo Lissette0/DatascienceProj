@@ -12,7 +12,7 @@ from sklearn.linear_model import LinearRegression
 # SETTING PAGE CONFIG TO WIDE MODE
 st.set_page_config(layout="wide", page_title='NYCHA DataScience', page_icon="✨")
 
-st.title('Services Demand for NYCHA residents 🌃') #title of the page
+st.title("Services/Programs' Demand for NYCHA residents 🌃") #title of the page
 st.markdown("""---""")
 st.subheader("Exploring Enrollment rates for services/programs provided to NYCHA Residents")
 st.write("CSCI 39542 Data Science Project")
