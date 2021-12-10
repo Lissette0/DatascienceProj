@@ -5,13 +5,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 import altair as alt
+import plotly.graph_objects as go
+from sklearn.linear_model import LinearRegression
 
-#st.set_page_config(page_title='NYCHA DataScience', page_icon="🖖")
 
 # SETTING PAGE CONFIG TO WIDE MODE
 st.set_page_config(layout="wide", page_title='NYCHA DataScience', page_icon="✨")
 
-st.title('Impact NYCHA Services has on Residents')
+st.title('Impact NYCHA Services has on Residents') #title of the page
 
 st.info("Funding for NYCHA has been decreasing since 1998, the purpose of this project is to analyze the services that are the most impactful and used by public housing residents. This will demosntrate which services should recieve more funding since they help more residents.")
 
@@ -41,15 +42,11 @@ def sc_data():
     snapdf = RAWsnap()
     dropCols = ['Submitted applications for benefits under SNAP','Were income-eligible for SNAP benefits','Submitted applications for benefits under Cash Assistance', 'Were income-eligible for Cash Assisstance']
     snapdf = snapdf.drop(columns=dropCols) # drop the cols from the dataframe
+    snapdf['Year'] = snapdf['Year'].astype(str)
     snap = snapdf.groupby(['Year'], as_index=False)['Received benefits under SNAP'].sum()
     cash = snapdf.groupby(['Year'], as_index=False)['Received benefits under Cash Assistance'].sum()
     result = pd.merge(snap, cash, on=["Year"])
     return result
-
-scDF = sc_data()
-fig0 = px.bar(scDF, x="Year", y=["Received benefits under SNAP", "Received benefits under Cash Assistance"], title="NYCHA Residents that reiceved SNAP and/or Cash Assistance ", barmode='group', height=600)
-# st.dataframe(df) # if need to display dataframe
-st.plotly_chart(fig0)
 
 #end of snap and cash analysis ###########################
 
@@ -60,13 +57,14 @@ st.plotly_chart(fig0)
 def RAWork(filename = "Workforce_1.csv"):
     df = pd.read_csv(filename)
     return df
-    
+
+#this function...
 @st.cache()
 def work_data():
     workdf = RAWork()
-    workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
     dropCols = ['Applied for the program','Average Wage','Enrolled in college-readiness courses or participated in college-readiness activities through the program']
     workdf = workdf.drop(columns=dropCols)
+    workdf.drop(workdf.loc[workdf['Borough']=='Unknown'].index, inplace=True)
     workdf['Placed into full-time or part-time jobs'] = (workdf.iloc[:, 3:8].sum(axis=1))
     workdf.drop(workdf.iloc[:,3:8] , axis=1, inplace=True)
     enroll = workdf.groupby(['Year'], as_index=False)['Were accepted and enrolled'].sum()
@@ -75,14 +73,19 @@ def work_data():
     return result
 
 
-workDF = work_data()
-fig01 = px.bar(workDF, x='Year', y=['Were accepted and enrolled', 'Placed into full-time or part-time jobs'], title="NYCHA Residents that enrolled/benefited from Workforce 1 Program ", barmode='group', height=600)
-# st.dataframe(df) # if need to display dataframe
-st.plotly_chart(fig01)
 
+row2_1, row2_2 = st.columns((2,2))
 
+with row2_1: 
+    scDF = sc_data()
+    fig0 = px.bar(scDF, x="Year", y=["Received benefits under SNAP", "Received benefits under Cash Assistance"], title="NYCHA Residents that reiceved SNAP and/or Cash Assistance ", barmode='group', height=600)
+    st.plotly_chart(fig0)
 
-
+with row2_2:
+    st.warning("make a selectbox to put this on its own")
+    workDF = work_data()
+    fig01 = px.bar(workDF, x='Year', y=['Were accepted and enrolled', 'Placed into full-time or part-time jobs'], title="NYCHA Residents that enrolled/benefited from Workforce 1 Program ", barmode='group', height=600)
+    st.plotly_chart(fig01)
 
 
 
@@ -114,7 +117,7 @@ if st.checkbox('Show Raw Data: 2017-19 Financial Services for NYCHA Residents'):
 def fin():
     df1 = financial1()
     df2 = financial2()
-    df1 = df1.append(df2)  #add 2019 data with the 2017-18 values dataframe
+    df1 = df1.append(df2)  #join 2019 data with the 2017-18 values dataframe
     nan_value = float("NaN")
     df1.replace("", nan_value, inplace=True) #replace empty values with NaN
     df1.dropna(how='all', axis=1, inplace=True) #drop columns that contain nothing in them 
@@ -187,11 +190,6 @@ def financial_result1():
     return result
 
 
-finDF = financial_result1()
-fig1 = px.bar(finDF, x="Year", y=["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"], title="NYCHA Residents that enrolled in the Financial Services ", barmode='group', height=600)
-# st.dataframe(df) # if need to display dataframe
-st.plotly_chart(fig1)
-st.write(finDF)
 
 def financial_result2():
     lst = [2017,2018,2019]
@@ -217,21 +215,29 @@ def financial_result2():
     result = result.join([col1, col2, col3, col4, col5, col6])
     return result
 
-finDF1 = financial_result2()
+
+row4_1, row4_2 = st.columns((2,2))
+with row4_1:
+    finDF = financial_result1()
+    fig1 = px.bar(finDF, x="Year", y=["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"], title="NYCHA Residents that enrolled in the Financial Services ", barmode='group', height=600)
+    st.plotly_chart(fig1)
+
+with row4_2:
+    finDF1 = financial_result2()
+    fig12 = px.bar(finDF1, x="Year", y=["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"], 
+                    title="NYCHA Residents that Reported program to be beneficial ", barmode='group', height=600)
+    st.plotly_chart(fig12)
 
 
-fig12 = px.bar(finDF1, x="Year", y=["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"], 
-                 title="NYCHA Residents that Reported program to be beneficial ", barmode='group', height=600)
-# st.dataframe(df) # if need to display dataframe
-st.plotly_chart(fig12)
 
 
+def combineFin():
+    comb = financial_result1()
+    comb["Total_financial"]= (comb.iloc[:, 1:-1].sum(axis=1)) + comb.iloc[: , -1]  #add all the columns where resident reported the program to be helpful
+    comb.loc[len(comb.index)] = ['2020', None, None, None, None,None, None, None]
+    return comb
 
-
-#add the program services to two dfs  one for residents who participated and another for how many benefited from it 
-
-
-#storing snap and cash program dataframe
+comb = combineFin()
 
 
 #storing the analysis from the Summer Youth df by amount applied and accepted per year
@@ -242,45 +248,132 @@ def year_sum():
     yearsDF['Year'] = [2018, 2019]
     return yearsDF
 
+
+
 yearsDF = year_sum()
 raw_summeryouth = load_data()
 #showing the raw data for Summer Youth 
 if st.checkbox('Show Raw Data: Summer Youth Employment Program (SYEP) for NYCHA Residents'):
      st.write(raw_summeryouth)
+     st.write("Analysis on the raw data")
+     st.write(yearsDF)
 
 
-row1_4, row1_3 = st.columns((2,3))
-
-with row1_4:
-     #visualizing the analysis of the summer youth program by year 
-    fig = px.bar(yearsDF, x="Year", y=["Applied for the program", "Were accepted and enrolled"], title="NYCHA Residents that Applied to Summer Youth Program Vs. were accepted" ,barmode='group', height=600)
-    st.plotly_chart(fig)
+#visualizing the analysis of the summer youth program by year 
+fig = px.bar(yearsDF, x="Year", y=["Applied for the program", "Were accepted and enrolled"], title="NYCHA Residents that Applied to Summer Youth Program Vs. were accepted" ,barmode='group', height=600)
+st.plotly_chart(fig)
 
 
-row1_1, row1_2 = st.columns((3,2))
 
+
+@st.cache
+def pie_data():  #this function takes the mean number of all the resisdents for each program/service and stores it into a series
+    df = finDF[["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"]]
+    dfmean = df.mean().mean()
+    values = [dfmean]
+    col_mean = scDF["Received benefits under SNAP"].mean()
+    values.append(col_mean)
+    col_mean = scDF["Received benefits under Cash Assistance"].mean()
+    values.append(col_mean)
+    col_mean = workDF["Were accepted and enrolled"].mean()
+    values.append(col_mean)
+    col_mean = yearsDF["Were accepted and enrolled"].mean()
+    values.append(col_mean)
+    values = [round(num, 4) for num in values]
+    return values
+
+@st.cache
+def pie_data1():  #this function takes the mean number of all the resisdents for each program/service and stores it into a series
+    col_mean = finDF[["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"]].mean()
+    values = [col_mean.iloc[0], col_mean.iloc[1], col_mean.iloc[2], col_mean.iloc[3],col_mean.iloc[4],col_mean.iloc[5]]
+    values = [round(num, 4) for num in values]
+    return values
+
+
+row3_1, row3_2 = st.columns((2,2))
+with row3_1: 
+    v = pie_data()
+    labels = ["Financial Services", "SNAP", "Cash Assistance", "Workforce 1", "Summer Youth"]
+    fig03 = go.Figure(data=[go.Pie(labels=labels, values=v)])
+    st.plotly_chart(fig03)
+
+with row3_2: 
+    v1 = pie_data1()
+    labels1 = ["Empowerment Center Program", "Residents CAN!", "La Ventanilla", "Ready to Rent", "EmpoweredNYC", "Student Loan Debt Clinic"] 
+    fig04 = go.Figure(data=[go.Pie(labels=labels1, values=v1, marker_colors=["#FF97FF", "#FECB52", "#B6E880", "#FF6692", "#19D3F3", "#FFA15A"])])
+    fig04.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
+    st.plotly_chart(fig04)
+
+
+
+# rfig = px.scatter(scDF, x="Year", y="Received benefits under Cash Assistance", trendline="ols")
+# st.write(rfig)
+
+# df = px.data.tips()
+# fig09 = px.scatter(df, x="total_bill", y="tip", trendline="ols")
+# st.write(fig09)
+
+
+#getting Linear regression line
+X = scDF["Year"]
+Y = scDF["Received benefits under Cash Assistance"]
+X= X.values.reshape(-1,1)
+Y= Y.values.reshape(-1,1)
+linear_regressor = LinearRegression()  # create object for the class
+linear_regressor.fit(X, Y)  # perform linear regression
+Y_pred = linear_regressor.predict(X)  # make predictions
+
+
+def custom_legend_name(new_names):
+    for i, new_name in enumerate(new_names):
+        fig09.data[i].name = new_name
+
+SummerYouth_enrollment = [None, 10329.0, 10643.0, None]
+
+
+
+workDF.loc[len(workDF.index)] = ['2020',None,None]
+with st.echo(code_location='below'):
+    listyear = ["2017","2018","2019","2020"]
+    fig09 = px.scatter(
+        x=listyear,
+        y=[scDF["Received benefits under Cash Assistance"], scDF["Received benefits under SNAP"], SummerYouth_enrollment, comb["Total_financial"], workDF["Were accepted and enrolled"].astype(float) ],
+        trendline="ols", trendline_color_override="red"
+    )
+    custom_legend_name(["Cash Assistance", None, "SNAP", None, "Summer Youth", None, "Financial Services",None, "Workforce 1"])
+    fig09.update_layout(
+    title="Regression line For Each Service/Program",
+    xaxis_title="Year",
+    yaxis_title="Enrollment",
+    legend_title="Service/Program")
+    fig09.update_traces(marker_size=10)
+    st.plotly_chart(fig09)
+
+row1_1, row1_2 = st.columns((1,4))
 with row1_1:
-    chart_data = pd.DataFrame( np.random.randn(20, 3), columns=['SNAP and Cash Service', 'Finanical Services', 'REEF/Workforce Service'])
-    st.line_chart(chart_data)
+    plist = ["SNAP", "Cash Assistance", "Financial Services", "Summer Youth", "WorkForce 1"]
+    service = st.selectbox("Select a Program/Service:", plist)
 
-#with row1_2: 
-# PIE CHARTTTTT, where the slices will be ordered and plotted counter-clockwise:
-    # labels = 'SNAP and CASH Service', 'Summer Youth Service', 'Financial Services', 'Workforce Service'
-    # sizes = [15, 30, 45, 10]
-    # explode = (0, 0, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
-    # fig1, ax1 = plt.subplots()
-    # ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-    #         shadow=True, startangle=90)
-    # ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
-    # st.pyplot(fig1)
-
-
-
-
+with row1_2:
+    if service == "Cash Assistance":
+        rfig1 = px.scatter(scDF, x="Year", y="Received benefits under Cash Assistance", trendline="ols")
+        rfig1.update_traces(marker_size=10)
+        st.plotly_chart(rfig1)
+    elif service == "Summer Youth":
+        rfig2 = px.scatter(yearsDF, x="Year", y="Were accepted and enrolled", trendline="ols")
+        rfig2.update_traces(marker_size=10)
+        st.plotly_chart(rfig2)
+    elif service == "SNAP":
+        rfig3 = px.scatter(scDF, x="Year", y="Received benefits under SNAP", trendline="ols")
+        rfig3.update_traces(marker_size=10)
+        st.plotly_chart(rfig3)
+    else:
+        st.write("get cash")
 
 st.warning('More Visualizations to come...')
+
+
+
 
 
 body = ''' 
@@ -290,3 +383,6 @@ body = '''
 if st.checkbox('Code done to get linear regression'):
     st.code(body, language = 'python')
 
+col1, col2, col3, col4, col5 = st.columns(5)
+if col3.button("✨Thanks for reading my Project✨"):
+    st.balloons()
