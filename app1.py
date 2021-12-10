@@ -335,15 +335,15 @@ SummerYouthdf = pd.DataFrame(SummerYouth_enrollment, columns=['SummerYouth_enrol
 
 
 workDF.loc[len(workDF.index)] = ['2020',None,None]
-
+print(scDF["Received benefits under Cash Assistance"])
 with st.echo(code_location='below'):
     listyear = ["2017","2018","2019","2020"]
     fig09 = px.scatter(
         x=listyear,
-        y=[scDF["Received benefits under Cash Assistance"].astype(float), scDF["Received benefits under SNAP"].astype(float), SummerYouthdf["SummerYouth_enrollment"].astype(float), comb["Total_financial"].astype(float), workDF["Were accepted and enrolled"].astype(float)],
+        y=[scDF["Received benefits under Cash Assistance"].astype(float), scDF["Received benefits under SNAP"].astype(float), SummerYouthdf["SummerYouth_enrollment"], comb["Total_financial"].astype(float)],
         trendline="ols"
     )
-    custom_legend_name(["Cash Assistance", None, "SNAP", None, "Summer Youth", None, "Financial Services",None, "Workforce 1"])
+    custom_legend_name(["Cash Assistance", None, "SNAP", None, "Summer Youth", None, "Financial Services"])
     fig09.update_layout(
     title="Regression line For Each Service/Program",
     xaxis_title="Year",
