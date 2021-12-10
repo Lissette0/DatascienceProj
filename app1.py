@@ -266,7 +266,7 @@ raw_summeryouth = load_data()
 
 st.subheader('Bar Graphs')
 row4_1, row4_2 = st.columns((2,2))
-row1_1, row1_2, row1_3 = st.columns((1,2,2))
+row1_1, row1_2, row1_3 = st.columns((0.75,2.25,2))
 with row1_1:
     plist = ["SNAP/Cash Assistance", "Financial Services", "Summer Youth", "WorkForce 1"]
     service = st.selectbox("Select a Program/Service:", plist)
