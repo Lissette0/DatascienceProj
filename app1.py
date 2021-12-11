@@ -33,6 +33,8 @@ st.markdown("""---""")
 st.markdown('''<div> <h3 style = "font-family: 'Poppins', sans-serif">Exploring Enrollment rates of services/programs provided to NYCHA Residents</h3></div>''', unsafe_allow_html = True)
 #st.subheader("Exploring Enrollment rates for services/programs provided to NYCHA Residents")
 st.write("CSCI 39542 Data Science Project")
+link = '[GitHub Repo](https://github.com/Lissette0/DatascienceProj)'
+st.markdown(link, unsafe_allow_html=True)
 st.markdown("""---""")
 st.subheader('Overview')
 st.info("The New York City Housing Authority (NYCHA), is the largest public housing authority in North America, was created in 1935 to provide decent, affordable housing for low- and moderate-income New Yorkers. There has been a steady decline in federal and state funding for NYCHA (New York City Housing Authority) since 1998. The purpose of this project is to analyze the services that are the most impactful and used by public housing residents. This will demonstrate which services should receive more funding since they benefit more residents. Based on this, my hypothesis was that since NYCHA’s funding is plummeting, fewer residents are receiving the help they need through the services and programs that are available specifically for NYCHA residents. I use datasets from NYC Open Data to collect information on various different programs/services provided to NYCHA residents: SNAP(The Supplemental Nutrition Assistance Program), Cash Assistance, Workforce 1, and some financial services. Links and more information to these data sources can be found under ‘CITATIONS’ and ‘Data Used’. I mainly used streamlit, plotly, and matplotlib to make statistical analysis and run Linear fit trend lines on each program/service listed above. I look through the number of residents that enroll in a specific service each year and for some, how many of them reported to have benefited from that service/program. In the end, we see that the services that are most used (SNAP and Cash Assistance) are declining over the years. We also see that from all of the financial services available, the Empowerment Center Program is most beneficial to NYCHA residents. ")
@@ -105,7 +107,7 @@ with st.expander("CITATIONS"):
 
 #Storing/cleaning csv files to cache ################
 @st.cache
-def load_data(filename = "SummerYouth.csv"):
+def load_data(filename = "./Datasets/SummerYouth.csv"):
     df = pd.read_csv(filename)
     dropCols = ['Average wage of residents','Enrolled in financial counseling services through the program','Enrolled in college-readiness courses or participated in college-readiness activities through the program']
     df = df.drop(columns=dropCols) # drop the cols from the dataframe
@@ -114,7 +116,7 @@ def load_data(filename = "SummerYouth.csv"):
 
 #storing SNAP and Cash Assistance for NYCHA Residents df
 @st.cache
-def RAWsnap(filename = "SNAPandCASH.csv"):
+def RAWsnap(filename = "./Datasets/SNAPandCASH.csv"):
     df = pd.read_csv(filename)
     return df
 #this function uses the raw data snap and cash to get the yearly sum of the number of residents that received benefits under snap and the number that recieved the cash assistance 
@@ -131,7 +133,7 @@ def sc_data():
 
 #storing Workforce 1 program for NYCHA Residents df
 @st.cache
-def RAWork(filename = "Workforce_1.csv"):
+def RAWork(filename = "./Datasets/Workforce_1.csv"):
     df = pd.read_csv(filename)
     return df
 
@@ -153,13 +155,13 @@ def work_data():
 
 #storing 2017-18 financial programs dataframe
 @st.cache
-def financial1(filename = "2019Financial_services.csv"):
+def financial1(filename = "./Datasets/2019Financial_services.csv"):
     df = pd.read_csv(filename)
     return df
 
 #storing 2019 financial programs dataframe
 @st.cache
-def financial2(filename = "2017-18_Financial_Services.csv"):
+def financial2(filename = "./Datasets/2017-18_Financial_Services.csv"):
     df = pd.read_csv(filename)
     return df
 
