@@ -10,9 +10,7 @@ from sklearn.linear_model import LinearRegression
 
 
 # SETTING PAGE CONFIG TO WIDE MODE
-st.set_page_config(layout="wide", page_title='NYCHA DataScience', page_icon="✨")
-
-st.title("Decline of Programs for NYCHA Residents 🌃") #title of the page
+st.set_page_config(layout="wide", page_title='NYCHA Data Science', page_icon="✨")
 
 st.markdown(''' <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,9 +28,9 @@ st.markdown(
         unsafe_allow_html=True,
     )
 
-
+st.markdown("""<h1 style="float: left; font-family: 'Poppins', sans-serif;">Decline of Programs for NYCHA Residents</h1><img style="float: right; width:200px; height:200px" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/64/New_York_City_Housing_Authority_%28logo%29.svg/1200px-New_York_City_Housing_Authority_%28logo%29.svg.png" />""", unsafe_allow_html=True) #title of the page
 st.markdown("""---""")
-st.markdown('''<div> <h3 >Exploring Enrollment rates of services/programs provided to NYCHA Residents</h3></div>''', unsafe_allow_html = True)
+st.markdown('''<div> <h3 style = "font-family: 'Poppins', sans-serif">Exploring Enrollment rates of services/programs provided to NYCHA Residents</h3></div>''', unsafe_allow_html = True)
 #st.subheader("Exploring Enrollment rates for services/programs provided to NYCHA Residents")
 st.write("CSCI 39542 Data Science Project")
 st.markdown("""---""")
