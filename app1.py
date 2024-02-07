@@ -37,7 +37,7 @@ st.write("CSCI 39542 Data Science Project")
 # st.markdown(link, unsafe_allow_html=True)
 st.markdown("""---""")
 st.subheader('Overview')
-st.info("The New York City Housing Authority (NYCHA), the largest public housing authority in North America, was established in 1935 with the mission of providing decent, affordable housing for low- and moderate-income New Yorkers. However, over the years, there has been a concerning trend of decreasing federal and state funding allocated to NYCHA, beginning in 1998.
+st.info("""The New York City Housing Authority (NYCHA), the largest public housing authority in North America, was established in 1935 with the mission of providing decent, affordable housing for low- and moderate-income New Yorkers. However, over the years, there has been a concerning trend of decreasing federal and state funding allocated to NYCHA, beginning in 1998.
 
 The aim of this project is to conduct a comprehensive analysis of the services provided by NYCHA that have the greatest impact on and utilization by public housing residents. By identifying these critical services, I advocate for increased funding to ensure that residents receive the support they need.
 
@@ -47,7 +47,7 @@ My analysis employs tools such as Streamlit, Plotly, and Matplotlib to conduct s
 
 My findings reveal concerning trends: notably, the utilization of critical services such as SNAP and Cash Assistance is declining over the years. Furthermore, among the array of financial services offered, the Empowerment Center Program emerges as particularly beneficial to NYCHA residents.
 
-In conclusion, this analysis underscores the urgent need for increased support and funding for NYCHA. By prioritizing resources towards the most impactful services, I aim to ensure that NYCHA residents receive the assistance necessary to thrive. ")
+In conclusion, this analysis underscores the urgent need for increased support and funding for NYCHA. By prioritizing resources towards the most impactful services, I aim to ensure that NYCHA residents receive the assistance necessary to thrive. """)
 
 st.subheader('Data Used')
 with st.expander("See Descriptions"):
