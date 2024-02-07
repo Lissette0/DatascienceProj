@@ -170,7 +170,8 @@ def financial2(filename = "./Datasets/2017-18_Financial_Services.csv"):
 def fin():
     df1 = financial1()
     df2 = financial2()
-    df1 = df1.concat(df2)  #join 2019 data with the 2017-18 values dataframe
+    #df1 = df1.concat(df2)  #join 2019 data with the 2017-18 values dataframe
+    df1 = pd.concat([df1,df2])
     nan_value = float("NaN")
     df1.replace("", nan_value, inplace=True) #replace empty values with NaN
     df1.dropna(how='all', axis=1, inplace=True) #drop columns that contain nothing in them 
