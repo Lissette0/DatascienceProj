@@ -85,11 +85,15 @@ with st.expander("See Descriptions"):
     """)
 st.subheader('Techniques')
 st.info("""
-In executing my data science project, I seamlessly integrated a combination of powerful tools and libraries to derive actionable insights from the datasets. Leveraging Pandas, I efficiently managed and manipulated the data, conducting essential operations such as grouping, aggregation, and filtering with ease. Additionally, Numpy played a crucial role in facilitating advanced numerical computations, empowering me to perform precise statistical analyses and calculations.
+Leveraging statistical analysis techniques, I computed total enrollment for each service annually, providing a comprehensive view of enrollment trends. Furthermore, I delved deeper into select datasets, determining the count of residents reporting service benefits, thus enriching our understanding of user satisfaction.
 
-To visualize the findings effectively, I turned to Matplotlib, utilizing its capabilities to create visually engaging representations such as bar graphs, pie charts, and scatter plot line trend graphs. These visualizations not only enhanced comprehension but also provided stakeholders with intuitive insights into the data. Furthermore, SQL was instrumental in extracting targeted information directly from the datasets, enabling comparative analyses and supporting data-driven decision-making processes.
+In addition to statistical analysis, I conducted comparisons between applicants and enrolled individuals, shedding light on program acceptance rates. Utilizing Pandas and Numpy, I efficiently managed and manipulated the data, performing essential operations such as grouping, aggregation, and precise statistical calculations. This allowed me to calculate the mean enrollment for services over multiple years, normalizing the data for better comparison and culminating in the creation of visually engaging pie charts illustrating enrollment percentages across different programs.
 
-By seamlessly integrating Pandas, Numpy, Matplotlib, and SQL into my workflow, I was able to conduct comprehensive analyses that unearthed meaningful patterns and trends. This approach facilitated informed decision-making and empowered stakeholders with actionable insights derived from robust data analysis techniques.
+Moreover, I segmented the analysis further, focusing on enrollment within financial services, thus providing stakeholders with focused insights. To visualize the findings effectively, I turned to Matplotlib, creating visually engaging representations like bar graphs, pie charts, and scatter plot line trend graphs. Additionally, I employed linear regression models to depict the declining enrollment trends of various services over time, providing valuable predictive insights into future enrollment patterns.
+
+Additionally, SQL played a pivotal role in extracting targeted information directly from the datasets, enabling comparative analyses and supporting data-driven decision-making processes.
+
+By seamlessly integrating Pandas, Numpy, Matplotlib, and SQL into my workflow, I conducted comprehensive analyses that uncovered meaningful patterns and trends. This approach facilitated informed decision-making, empowering stakeholders with actionable insights derived from robust data analysis techniques.
 """)
 with st.expander("CITATIONS"):
                 st.write("""
