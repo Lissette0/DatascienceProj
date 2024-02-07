@@ -74,9 +74,11 @@ with st.expander("See Descriptions"):
     """)
 st.subheader('Techniques')
 st.info("""
-With the bar graphs, I used statistical analysis of the datasets to get the sum of each service’s enrollment per year. With some datasets, I was able to do the same to get the number of residents that reported the service to be beneficial. I also did some comparisons between the number of residents who applied vs the number that were accepted and enrolled in the program. 
-With the pie charts, I used Statistical analysis by finding the mean of each service/program’s enrollment for the 2-4 years, normalizing them, and visualizing it with pie charts. One shows the enrollment percentage for the 5 programs and services and the other shows the enrollment breakdown for the financial services. 
-With the scatter plot line trend graph, I used Linear regression models to show the declining trend of enrollment of the services/programs. 
+In analyzing the data for my data science project, I employed several techniques to enhance clarity and insight. Utilizing statistical analysis, I computed the total enrollment for each service annually, providing a comprehensive view of enrollment trends. Furthermore, for select datasets, I delved deeper, determining the count of residents reporting service benefits, enriching our understanding of user satisfaction.
+
+In addition, I conducted comparisons between the number of applicants and those successfully enrolled, shedding light on program acceptance rates. Leveraging statistical methods, I calculated the mean enrollment for services over multiple years, normalizing the data for better comparison. This culminated in the creation of pie charts illustrating enrollment percentages across different programs, offering a succinct visual representation of the data.
+
+Moreover, I segmented the analysis further, presenting a breakdown of enrollment specifically within financial services, allowing for focused insights. Finally, employing linear regression models, I depicted the declining enrollment trends of various services over time, providing valuable predictive insights into future enrollment patterns.
 """)
 with st.expander("CITATIONS"):
                 st.write("""
@@ -476,5 +478,5 @@ st.markdown("""---""")
 
 
 col1, col2, col3, col4, col5 = st.columns(5)
-if col3.button("✨Thanks for reading my Project✨"):
+if col3.button("Thank you for taking the time to view my project!😊✨"):
     st.balloons()
