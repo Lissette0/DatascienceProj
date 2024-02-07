@@ -37,7 +37,18 @@ st.write("CSCI 39542 Data Science Project")
 # st.markdown(link, unsafe_allow_html=True)
 st.markdown("""---""")
 st.subheader('Overview')
-st.info("The New York City Housing Authority (NYCHA), is the largest public housing authority in North America, was created in 1935 to provide decent, affordable housing for low- and moderate-income New Yorkers. There has been a steady decline in federal and state funding for NYCHA (New York City Housing Authority) since 1998. The purpose of this project is to analyze the services that are the most impactful and used by public housing residents. This will demonstrate which services should receive more funding since they benefit more residents. Based on this, my hypothesis was that since NYCHA’s funding is plummeting, fewer residents are receiving the help they need through the services and programs that are available specifically for NYCHA residents. I use datasets from NYC Open Data to collect information on various different programs/services provided to NYCHA residents: SNAP(The Supplemental Nutrition Assistance Program), Cash Assistance, Workforce 1, and some financial services. Links and more information to these data sources can be found under ‘CITATIONS’ and ‘Data Used’. I mainly used streamlit, plotly, and matplotlib to make statistical analysis and run Linear fit trend lines on each program/service listed above. I look through the number of residents that enroll in a specific service each year and for some, how many of them reported to have benefited from that service/program. In the end, we see that the services that are most used (SNAP and Cash Assistance) are declining over the years. We also see that from all of the financial services available, the Empowerment Center Program is most beneficial to NYCHA residents. ")
+st.info("The New York City Housing Authority (NYCHA), the largest public housing authority in North America, was established in 1935 with the mission of providing decent, affordable housing for low- and moderate-income New Yorkers. However, over the years, there has been a concerning trend of decreasing federal and state funding allocated to NYCHA, beginning in 1998.
+
+The aim of this project is to conduct a comprehensive analysis of the services provided by NYCHA that have the greatest impact on and utilization by public housing residents. By identifying these critical services, I advocate for increased funding to ensure that residents receive the support they need.
+
+Drawing upon datasets from NYC Open Data, I examine various programs and services available to NYCHA residents, including SNAP (The Supplemental Nutrition Assistance Program), Cash Assistance, Workforce 1, and several financial services. For detailed information and data sources, please refer to the 'CITATIONS' and 'Data Used' sections.
+
+My analysis employs tools such as Streamlit, Plotly, and Matplotlib to conduct statistical analyses and visualize trends. I utilize linear fit trend lines to assess the trajectory of each program or service over time. Specifically, I evaluate the annual enrollment rates in specific services and, in some cases, the reported benefits received by participants.
+
+My findings reveal concerning trends: notably, the utilization of critical services such as SNAP and Cash Assistance is declining over the years. Furthermore, among the array of financial services offered, the Empowerment Center Program emerges as particularly beneficial to NYCHA residents.
+
+In conclusion, this analysis underscores the urgent need for increased support and funding for NYCHA. By prioritizing resources towards the most impactful services, I aim to ensure that NYCHA residents receive the assistance necessary to thrive. ")
+
 st.subheader('Data Used')
 with st.expander("See Descriptions"):
     st.write("""
